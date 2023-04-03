@@ -1,0 +1,22 @@
+{
+  "name": "hyouka-serverless.node",
+  "version": "0.1.0",
+  "description": "hyouka.js on AWS serverless",
+  "main": "handler.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://gitbucket.aozora.cloud/git/emile/hyouka-serverless.node.git"
+  },
+  "keywords": [
+    "AWS",
+    "lisp"
+  ],
+  "author": "Akimichi Tatsukawa",
+  "license": "ISC",
+  "dependencies": {
+    "hyouka.js": "0.7.6"
+  }
+}
