@@ -107,7 +107,13 @@ functions:
 #    Define function environment variables here
 #    environment:
 #      variable2: value2
-
+package:
+  exclude:
+    - package.json
+    - event.json
+    - tests/**
+    - LICENSE
+    - README.md
 # you can add CloudFormation resource templates here
 #resources:
 #  Resources:
