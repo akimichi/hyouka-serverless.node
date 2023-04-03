@@ -18,25 +18,23 @@ module.exports.evaluate = async (event, context, callback) => {
     callback(null, {
       statusCode: 400,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+      body: {
           message: "Validation Error",
           input: event
-      })
+      }
     });
     return;
   } else {
     const environment = Env.prelude()
-    // Maybe.match(Semantics.evaluate(body.code)(environment),{
     Maybe.match(Cont.eval(Evaluator(environment)(body.code)),{
       nothing: (message) => {
         callback(null, {
           statusCode: 400,
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(
-            {
-              message,
-              input: event,
-            })
+          body: {
+            message,
+            input: event,
+          }
         });
         return
       },
@@ -44,28 +42,18 @@ module.exports.evaluate = async (event, context, callback) => {
         callback(null, {
           statusCode: 200,
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(
-            {
-              message: value,
-              input: event,
-            })
+          body: {
+            answer: value,
+            input: event,
+          }
+          // body: JSON.stringify(
+          //   {
+          //     message: value,
+          //     input: event,
+          //   })
         });
         return
       }
     })
   }
-  // return {
-  //   statusCode: 200,
-  //   body: JSON.stringify(
-  //     {
-  //       message: "body",
-  //       input: event,
-  //     },
-  //     null,
-  //     2
-  //   ),
-  // };
-
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
 };
